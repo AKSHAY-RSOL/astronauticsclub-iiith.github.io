@@ -51,7 +51,7 @@ export async function GET() {
                         modified: stats.mtime.toISOString(),
                     });
                 }
-            } catch (error) {
+            } catch (error: unknown) {
                 // Category directory doesn't exist or can't be read, skip it
                 console.warn(`Could not read ${category} directory:`, error);
                 continue;
@@ -65,8 +65,9 @@ export async function GET() {
         }
 
         return NextResponse.json({ images: allImages });
-    } catch (error) {
+    } catch (error: unknown) {
         console.error("Error fetching gallery images:", error);
         return NextResponse.json({ error: "Failed to fetch gallery images" }, { status: 500 });
     }
 }
+

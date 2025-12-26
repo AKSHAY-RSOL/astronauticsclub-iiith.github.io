@@ -75,7 +75,7 @@ export async function GET(request: NextRequest) {
                 pages: Math.ceil(total / limit),
             },
         });
-    } catch (error) {
+    } catch (error: unknown) {
         console.error("Error fetching events:", error);
         return NextResponse.json({ error: "Failed to fetch events" }, { status: 500 });
     }
@@ -125,7 +125,7 @@ export async function POST(request: NextRequest) {
         });
 
         return NextResponse.json(event.toObject(), { status: 201 });
-    } catch (error) {
+    } catch (error: unknown) {
         console.error("Error creating event:", error);
         if (error instanceof Error && error.message.includes("Unauthorized")) {
             return NextResponse.json({ error: "Authentication required" }, { status: 401 });
@@ -133,3 +133,4 @@ export async function POST(request: NextRequest) {
         return NextResponse.json({ error: "Failed to create event" }, { status: 500 });
     }
 }
+

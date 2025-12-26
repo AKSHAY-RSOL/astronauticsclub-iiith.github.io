@@ -13,7 +13,7 @@ const FILE_DIRECTORY = process.env.FILE_DIRECTORY || path.join(process.cwd(), "p
 const ensureUploadDirectory = async () => {
     try {
         await mkdir(FILE_DIRECTORY, { recursive: true });
-    } catch (error) {
+    } catch (error: unknown) {
         console.error("Failed to create upload directory:", error);
     }
 };
@@ -87,7 +87,7 @@ export async function POST(request: NextRequest) {
             },
             { status: 201 }
         );
-    } catch (error) {
+    } catch (error: unknown) {
         console.error("Error uploading avatar:", error);
         return NextResponse.json(
             { error: "Internal server error during avatar upload" },
@@ -95,3 +95,4 @@ export async function POST(request: NextRequest) {
         );
     }
 }
+

@@ -29,7 +29,7 @@ const FILE_DIRECTORY = process.env.FILE_DIRECTORY || path.join(process.cwd(), "p
 const ensureUploadDirectory = async () => {
     try {
         await mkdir(FILE_DIRECTORY, { recursive: true });
-    } catch (error) {
+    } catch (error: unknown) {
         console.error("Failed to create upload directory:", error);
     }
 };
@@ -79,7 +79,7 @@ export async function GET(request: NextRequest) {
             });
 
         return NextResponse.json({ files });
-    } catch (error) {
+    } catch (error: unknown) {
         console.error("Error retrieving files:", error);
         return NextResponse.json(
             {
@@ -147,7 +147,7 @@ export async function POST(request: NextRequest) {
             },
             { status: 201 }
         );
-    } catch (error) {
+    } catch (error: unknown) {
         console.error("Error uploading file:", error);
         return NextResponse.json(
             {
@@ -178,7 +178,7 @@ export async function DELETE(request: NextRequest) {
             fs.unlinkSync(filePath);
             return NextResponse.json({ success: true }, { status: 201 });
         }
-    } catch (error) {
+    } catch (error: unknown) {
         console.error("Error deleting image:", error);
         return NextResponse.json(
             {
@@ -188,3 +188,4 @@ export async function DELETE(request: NextRequest) {
         );
     }
 }
+

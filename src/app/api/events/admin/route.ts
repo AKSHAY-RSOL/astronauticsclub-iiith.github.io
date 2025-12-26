@@ -13,7 +13,7 @@ export async function GET() {
         const events = await Event.find({}).sort({ date: -1 }).lean();
 
         return NextResponse.json({ events });
-    } catch (error) {
+    } catch (error: unknown) {
         console.error("Error fetching admin events:", error);
 
         if (error instanceof Error && error.message.includes("access required")) {
@@ -104,7 +104,7 @@ export async function POST(request: NextRequest) {
             message: "Event created successfully",
             event: newEvent,
         });
-    } catch (error) {
+    } catch (error: unknown) {
         console.error("Error creating event:", error);
 
         if (error instanceof Error && error.message.includes("access required")) {
@@ -185,7 +185,7 @@ export async function PUT(request: NextRequest) {
             message: "Event updated successfully",
             event: updatedEvent,
         });
-    } catch (error) {
+    } catch (error: unknown) {
         console.error("Error updating event:", error);
 
         if (error instanceof Error && error.message.includes("access required")) {
@@ -234,7 +234,7 @@ export async function DELETE(request: NextRequest) {
         return NextResponse.json({
             message: "Event deleted successfully",
         });
-    } catch (error) {
+    } catch (error: unknown) {
         console.error("Error deleting event:", error);
 
         if (error instanceof Error && error.message.includes("access required")) {
@@ -244,3 +244,4 @@ export async function DELETE(request: NextRequest) {
         return NextResponse.json({ error: "Failed to delete event" }, { status: 500 });
     }
 }
+

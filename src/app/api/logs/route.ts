@@ -49,8 +49,9 @@ export async function GET(request: NextRequest) {
                 error: "Log file not found or empty",
             });
         }
-    } catch (error) {
+    } catch (error: unknown) {
         console.error("Error fetching logs:", error);
         return NextResponse.json({ error: "Failed to fetch logs" }, { status: 500 });
     }
 }
+

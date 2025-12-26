@@ -16,7 +16,7 @@ export async function GET() {
 
         const inventory = await Inventory.find({}).sort({ year_of_purchase: -1 }).lean();
         return NextResponse.json({ inventory });
-    } catch (error) {
+    } catch (error: unknown) {
         console.error("Error fetching admin inventory:", error);
 
         if (error instanceof Error && error.message.includes("access required")) {
@@ -141,7 +141,7 @@ export async function POST(request: NextRequest) {
             message: "Inventory created successfully",
             Inventory: newInventory,
         });
-    } catch (error) {
+    } catch (error: unknown) {
         console.error("Error adding inventory:", error);
 
         if (error instanceof Error && error.message.includes("access required")) {
@@ -295,7 +295,7 @@ export async function PUT(request: NextRequest) {
             message: "Inventory updated successfully",
             inventory: updatedInventory,
         });
-    } catch (error) {
+    } catch (error: unknown) {
         console.error("Error updating inventory:", error);
         return NextResponse.json({ error: "Failed to update inventory" }, { status: 500 });
     }
@@ -353,7 +353,7 @@ export async function DELETE(request: NextRequest) {
         return NextResponse.json({
             message: "Inventory deleted successfully",
         });
-    } catch (error) {
+    } catch (error: unknown) {
         console.error("Error deleting Inventory:", error);
 
         if (error instanceof Error && error.message.includes("access required")) {
@@ -363,3 +363,4 @@ export async function DELETE(request: NextRequest) {
         return NextResponse.json({ error: "Failed to delete Inventory" }, { status: 500 });
     }
 }
+

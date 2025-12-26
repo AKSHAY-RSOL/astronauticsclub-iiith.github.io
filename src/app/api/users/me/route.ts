@@ -19,7 +19,7 @@ export async function GET() {
             createdAt: user.createdAt,
             updatedAt: user.updatedAt,
         });
-    } catch (error) {
+    } catch (error: unknown) {
         console.error("Error fetching user profile:", error);
         return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
@@ -73,8 +73,9 @@ export async function PUT(request: NextRequest) {
             createdAt: updatedUser.createdAt,
             updatedAt: updatedUser.updatedAt,
         });
-    } catch (error) {
+    } catch (error: unknown) {
         console.error("Error updating user profile:", error);
         return NextResponse.json({ error: "Internal server error" }, { status: 500 });
     }
 }
+

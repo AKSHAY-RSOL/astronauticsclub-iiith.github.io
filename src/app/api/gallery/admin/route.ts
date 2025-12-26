@@ -55,7 +55,7 @@ export async function GET() {
                         created: stats.birthtime.toISOString(),
                     });
                 }
-            } catch (error) {
+            } catch (error: unknown) {
                 console.warn(`Could not read ${category} directory:`, error);
                 continue;
             }
@@ -65,7 +65,7 @@ export async function GET() {
         allImages.sort((a, b) => new Date(b.modified).getTime() - new Date(a.modified).getTime());
 
         return NextResponse.json({ images: allImages });
-    } catch (error) {
+    } catch (error: unknown) {
         console.error("Error fetching admin gallery images:", error);
         return NextResponse.json({ error: "Failed to fetch gallery images" }, { status: 500 });
     }
@@ -156,7 +156,7 @@ export async function POST(request: NextRequest) {
             message: "Image uploaded successfully",
             image: newImage,
         });
-    } catch (error) {
+    } catch (error: unknown) {
         console.error("Error uploading image:", error);
         return NextResponse.json({ error: "Failed to upload image" }, { status: 500 });
     }
@@ -266,7 +266,7 @@ export async function PUT(request: NextRequest) {
             message: "Image updated successfully",
             image: updatedImage,
         });
-    } catch (error) {
+    } catch (error: unknown) {
         console.error("Error updating image:", error);
         return NextResponse.json({ error: "Failed to update image" }, { status: 500 });
     }
@@ -336,8 +336,9 @@ export async function DELETE(request: NextRequest) {
         return NextResponse.json({
             message: "Image deleted successfully",
         });
-    } catch (error) {
+    } catch (error: unknown) {
         console.error("Error deleting image:", error);
         return NextResponse.json({ error: "Failed to delete image" }, { status: 500 });
     }
 }
+

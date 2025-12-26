@@ -92,7 +92,7 @@ export async function GET(request: NextRequest) {
                 totalLikes: totalLikes[0]?.totalLikes || 0,
             },
         });
-    } catch (error) {
+    } catch (error: unknown) {
         console.error("Error fetching blogs:", error);
         return NextResponse.json({ error: "Failed to fetch blogs" }, { status: 500 });
     }
@@ -162,7 +162,7 @@ export async function POST(request: NextRequest) {
         });
 
         return NextResponse.json(savedBlog[0], { status: 201 });
-    } catch (error) {
+    } catch (error: unknown) {
         console.error("Error creating blog:", error);
         if (error instanceof Error && error.message.includes("Unauthorized")) {
             return NextResponse.json({ error: "Authentication required" }, { status: 401 });
@@ -170,3 +170,4 @@ export async function POST(request: NextRequest) {
         return NextResponse.json({ error: "Failed to create blog" }, { status: 500 });
     }
 }
+

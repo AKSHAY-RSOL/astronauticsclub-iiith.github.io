@@ -12,7 +12,7 @@ export async function GET() {
         const users = await User.find({}).sort({ createdAt: -1 });
 
         return NextResponse.json(users);
-    } catch (error) {
+    } catch (error: unknown) {
         console.error("Error fetching users:", error);
         return NextResponse.json({ error: "Failed to fetch users" }, { status: 500 });
     }
@@ -61,8 +61,9 @@ export async function POST(request: NextRequest) {
         });
 
         return NextResponse.json(user, { status: 201 });
-    } catch (error) {
+    } catch (error: unknown) {
         console.error("Error creating user:", error);
         return NextResponse.json({ error: "Failed to create user" }, { status: 500 });
     }
 }
+
