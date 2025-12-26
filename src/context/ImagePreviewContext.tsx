@@ -23,13 +23,13 @@ export const ImagePreviewProvider: React.FC<{ children: React.ReactNode }> = ({ 
     }>({ src: "", alt: "" });
 
     // Open preview function
-    const openPreview = (src: string, alt: string) => {
+    const openPreview = (src: string, alt: string): void => {
         setPreviewImage({ src, alt });
         setIsPreviewOpen(true);
     };
 
     // Close preview function
-    const closePreview = () => {
+    const closePreview = (): void => {
         setIsPreviewOpen(false);
     };
 

@@ -18,7 +18,30 @@ interface ConfirmState {
     onConfirm: () => void;
 }
 
-export function useAlert() {
+export interface UseAlertReturn {
+    showAlert: (message: string, type?: "success" | "error" | "warning" | "info") => void;
+    showSuccess: (message: string) => void;
+    showError: (message: string) => void;
+    showWarning: (message: string) => void;
+    showInfo: (message: string) => void;
+    closeAlert: () => void;
+    alertState: AlertState;
+    showConfirm: (
+        title: string,
+        message: string,
+        onConfirm: () => void,
+        options?: {
+            type?: "danger" | "warning" | "info";
+            confirmText?: string;
+            cancelText?: string;
+        }
+    ) => void;
+    closeConfirm: () => void;
+    handleConfirm: () => void;
+    confirmState: ConfirmState;
+}
+
+export function useAlert(): UseAlertReturn {
     const [alertState, setAlertState] = useState<AlertState>({
         isOpen: false,
         message: "",

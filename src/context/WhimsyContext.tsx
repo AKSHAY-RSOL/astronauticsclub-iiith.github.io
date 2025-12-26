@@ -66,7 +66,7 @@ export const WhimsyProvider: React.FC<{ children: React.ReactNode }> = ({ childr
     }, [isWhimsyActive, isLoaded]);
 
     // Toggle function
-    const toggleWhimsyMode = () => {
+    const toggleWhimsyMode = (): void => {
         setWhimsyMode((prev) => !prev);
     };
 

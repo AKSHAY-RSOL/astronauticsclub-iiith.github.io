@@ -1,9 +1,10 @@
 import { withAuth } from "next-auth/middleware";
 import { NextResponse } from "next/server";
+import { NextRequest } from "next/server";
 import { withBasePath } from "./components/common/HelperFunction";
 
 export default withAuth(
-    function middleware(req) {
+    function middleware(req: NextRequest & { nextauth: { token: unknown } }) {
         const token = req.nextauth.token;
         const isAdminRoute = req.nextUrl.pathname.startsWith(withBasePath(`/imtheboss`));
         const isBlogAuthorRoute = req.nextUrl.pathname.startsWith(
